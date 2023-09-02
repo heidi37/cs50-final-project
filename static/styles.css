@@ -1,3 +1,40 @@
 body {
     background: beige;
+    text-align: center;
+}
+
+.egg {
+    width: 100px;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+form {
+    width: 350px;
+    margin-top: 20px;
+}
+
+form div {
+    padding: 5px 0;
+    text-align: left;
+    margin-left: 27px;
+}
+
+form div label {
+    width: 26%;
+}
+
+button {
+    margin-top: 10px;
+    background: #555555;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
 }

@@ -1,14 +1,17 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
-app = Flask(__name__)
+app = Flask(__name__) #turn this file into a flask application
 
 @app.route('/')
-@app.route('/<name>')
+# @app.route('/<name>')
 
 def hello_world(name="Cutie"):
     return render_template("index.html", name=name)
 
-@app.route('/add/<int:num1>/<int:num2>')
+@app.route('/create-event', methods=["POST", "GET"])
+def createEvent():
+    return render_template("create-event.html")
 
-def add(num1, num2):
-    return render_template("add.html", num1=num1, num2=num2)
+@app.route('/add-guests', methods=["POST", "GET"])
+def addGuests():
+    return render_template("add-guests.html")

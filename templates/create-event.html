@@ -1,0 +1,25 @@
+{% extends "layout.html" %} {% block title %} Welcome | {{ super() }} {%
+endblock %} {% block content %}
+<h2>Create A Brunch List</h2>
+<form action="/add-guests" method="post">
+  <div>
+    <label for="event-name">Brunch:</label>
+    <input type="text" name="event-name" />
+  </div>
+  <div>
+    <label for="event-date">Date of:</label>
+    <input type="date" name="event-date" />
+  </div>
+  <div>
+    <label for="event-time">Time:</label>
+    <input type="time" name="event-event" />
+  </div>
+  <div>
+    <label for="event-location">Location:</label>
+    <input type="text" name="event-event" />
+  </div>
+  <div>
+    <button type="submit">Create Brunch</button>
+  </div>
+</form>
+{% endblock %}

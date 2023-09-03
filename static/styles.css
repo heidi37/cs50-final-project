@@ -13,6 +13,13 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    background: #fff;
+    width: 500px;
+}
+
+nav.container {
+    display: block;
+    background: hsl(60, 56%, 61%);
 }
 
 form {
@@ -37,4 +44,8 @@ button {
     border: none;
     padding: 5px 15px;
     border-radius: 5px;
+}
+
+i {
+    color: white;
 }

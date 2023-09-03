@@ -4,6 +4,13 @@
     <title>{% block title %}Let's Do Brunch!{% endblock %}</title>
     <meta name="viewport" content="initial-scale=1 width="device-width">
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
@@ -12,6 +19,15 @@
     <link rel="stylesheet" type="text/css" href="/static/styles.css" />
   </head>
   <body>
+    <nav class="container">
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('helloWorld') }}"
+            ><i class="fa-solid fa-house"></i
+          ></a>
+        </li>
+      </ul>
+    </nav>
     <div class="container">
       <h1>Let's Do Brunch!</h1>
       <h5>potluck breakfast planner</h5>

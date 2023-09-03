@@ -2,7 +2,10 @@
 endblock %} {% block content %}
 <h2>Guest List</h2>
 <div>
-  <table class="table table-striped">
+  <a href="{{ url_for('addDish') }}">
+    <button class="btn btn-success">Add A Dish</button>
+  </a>
+  <table class="table table-striped mt-5">
     <thead>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>

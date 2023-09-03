@@ -1,18 +1,31 @@
-<table class="table table-striped">
-  <thead>
-    <th scope="col">Name</th>
-    <th scope="col">Date</th>
-    <th scope="col">Time</th>
-    <th scope="col">Location</th>
-    <th scope="col">RSVPS</th>
-  </thead>
-  {% for brunch in brunches %}
-  <tr>
-    <td>{{ brunch.name }}</td>
-    <td>{{ brunch.date }}</td>
-    <td>{{ brunch.time }}</td>
-    <td>{{ brunch.location }}</td>
-    <td>{{ brunch.num_attend }}</td>
-  </tr>
-  {% endfor %}
-</table>
+<div class="table-div">
+  <table class="table table-striped table-resposive mt-5">
+    <thead>
+      <th scope="col">Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+      <th scope="col">Location</th>
+      <th scope="col">RSVPS</th>
+      <th></th>
+    </thead>
+    {% for brunch in brunches %}
+    <tr>
+      <td>{{ brunch.name }}</td>
+      <td>{{ brunch.date }}</td>
+      <td>{{ brunch.time }}</td>
+      <td>{{ brunch.location }}</td>
+      <td>{{ brunch.num_attend }}</td>
+      <td>
+        <form action="{{ url_for('deleteBrunch') }}" method="post">
+          <input type="hidden" name="id" value="{{ brunch.id }}" />
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <form action="{{ url_for('rsvpBrunch') }}" method="post">
+          <input type="hidden" name="id" value="{{ brunch.id }}" />
+          <button type="submit" class="btn btn-success">RSVP!</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>

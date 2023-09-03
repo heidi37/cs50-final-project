@@ -1,7 +1,14 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, session
+from flask_session.__init__ import Session
 
+#Configure app
 app = Flask(__name__) #turn this file into a flask application
+
+#Configure session
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 db = SQL("sqlite:///brunches.db")
 
@@ -59,5 +66,20 @@ def addDish():
 
 @app.route('/guest-list')
 def guestList():
-    attendees = db.execute("SELECT * FROM attendees")
+    # attendees = db.execute("SELECT * FROM attendees")
+    attendees = db.execute("SELECT first_name, last_name, dish_type, dish FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = 3")
     return render_template("guest-list.html", attendees=attendees)
+
+@app.route('/delete-brunch', methods=["POST"])
+def deleteBrunch():
+    id = request.form.get("id")
+    if id:
+        db.execute("DELETE FROM brunches WHERE id = ?", id)
+    return redirect("brunch-list")
+
+@app.route('/RSVP', methods=["POST"])
+def rsvpBrunch():
+    id = request.form.get("id")
+    # if id:
+    #     db.execute("DELETE FROM brunches WHERE id = ?", id)
+    return redirect("guest-list")

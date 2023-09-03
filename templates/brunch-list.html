@@ -1,22 +1,5 @@
 {% extends "layout.html" %} {% block title %} Brunch List | {{ super() }} {%
 endblock %} {% block content %}
 <h2>Brunch List</h2>
-<div>
-  <table class="table table-striped">
-    <thead>
-      <th scope="col">Name</th>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-      <th scope="col">Location</th>
-    </thead>
-    {% for brunch in brunches %}
-    <tr>
-      <td>{{ brunch.name }}</td>
-      <td>{{ brunch.date }}</td>
-      <td>{{ brunch.time }}</td>
-      <td>{{ brunch.location }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
+<div>{% include 'brunch-table.html' %}</div>
 {% endblock %}

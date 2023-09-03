@@ -16,7 +16,9 @@ DISHTYPES = [
 @app.route('/<name>')
 
 def helloWorld(name="Cutie"):
-    return render_template("index.html", name=name)
+    brunches = db.execute("SELECT * FROM brunches")
+    return render_template("index.html", name=name, brunches=brunches)
+
 
 @app.route('/create-event', methods=["POST", "GET"])
 def createEvent():

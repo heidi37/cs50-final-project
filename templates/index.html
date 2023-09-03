@@ -3,7 +3,8 @@ endblock %} {% block content %}
 <h2>Hello {{ name }}</h2>
 <div>
   <a href="{{ url_for('createEvent') }}"><button>Create A Brunch</button></a>
-  <a href="{{ url_for('addDish') }}"><button>Add Your Dish</button></a>
+  <!-- <a href="{{ url_for('addDish') }}"><button>Add Your Dish</button></a> -->
   <!-- <a href=""><button>Attend A Brunch</button></a> -->
+  <div>{% include 'brunch-table.html' %}</div>
 </div>
 {% endblock %}

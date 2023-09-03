@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <th scope="col">Name</th>
+    <th scope="col">Date</th>
+    <th scope="col">Time</th>
+    <th scope="col">Location</th>
+    <th scope="col">RSVPS</th>
+  </thead>
+  {% for brunch in brunches %}
+  <tr>
+    <td>{{ brunch.name }}</td>
+    <td>{{ brunch.date }}</td>
+    <td>{{ brunch.time }}</td>
+    <td>{{ brunch.location }}</td>
+    <td>{{ brunch.num_attend }}</td>
+  </tr>
+  {% endfor %}
+</table>

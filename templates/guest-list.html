@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block title %} Welcome | {{ super() }} {%
+endblock %} {% block content %}
+<h2>Guest List</h2>
+<div class="container">
+  <ul>
+    {% for name in attendees %}
+    <li>
+      {{ first_name }} {{last_name}} is bringing {{ dish_type }}, specifically
+      {{ dish }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block title %} Welcome | {{ super() }} {%
+endblock %} {% block content %}
+<h2>Add Guests</h2>
+<form action="/add-dish" method="post">
+  <div>
+    <label for="first-name" required>First Name:</label>
+    <input type="text" name="first-name" />
+  </div>
+  <div>
+    <label for="last-name" required>Last Name:</label>
+    <input type="text" name="last-name" />
+  </div>
+  <div>
+    <label for="dish-type" required>Dish Type:</label>
+    <select name="dish-type" id="dish-type">
+      <option disabled selected>--</option>
+      {% for dishtype in dishtypes %}
+      <option value="{{ dishtype }}">{{ dishtype }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="dish-name" required>Dish Name:</label>
+    <input type="text" name="dish-name" />
+  </div>
+  <div>
+    <button type="submit">Add Dish</button>
+  </div>
+</form>
+{% endblock %}

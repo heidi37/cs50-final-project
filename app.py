@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__) #turn this file into a flask application
 
@@ -35,7 +35,7 @@ def addDish():
         first_name = request.form.get("first-name")
         last_name = request.form.get("last-name")
         dish_type = request.form.get("dish-type")
-        dish = request.form.get("dish")
+        dish = request.form.get("dish-name")
         if not first_name or dish_type not in DISHTYPES:
             return render_template("failure.html")
 

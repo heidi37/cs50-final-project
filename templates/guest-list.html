@@ -1,14 +1,22 @@
-{% extends "layout.html" %} {% block title %} Welcome | {{ super() }} {%
+{% extends "layout.html" %} {% block title %} Guest List | {{ super() }} {%
 endblock %} {% block content %}
 <h2>Guest List</h2>
 <div class="container">
-  <ul>
-    {% for name in attendees %}
-    <li>
-      {{ first_name }} {{last_name}} is bringing {{ dish_type }}, specifically
-      {{ dish }}
-    </li>
+  <table class="table table-striped">
+    <thead>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Dish Type</th>
+      <th scope="col">Dish</th>
+    </thead>
+    {% for attendee in attendees %}
+    <tr>
+      <td>{{ attendee.first_name }}</td>
+      <td>{{ attendee.last_name }}</td>
+      <td>{{ attendee.dish_type }}</td>
+      <td>{{ attendee.dish }}</td>
+    </tr>
     {% endfor %}
-  </ul>
+  </table>
 </div>
 {% endblock %}

@@ -15,7 +15,7 @@ DISHTYPES = [
 ]
 
 @app.route('/')
-# @app.route('/<name>')
+@app.route('/<name>')
 
 def hello_world(name="Cutie"):
     return render_template("index.html", name=name)
@@ -46,4 +46,5 @@ def addDish():
 
 @app.route('/guest-list')
 def guestList():
-    return render_template("guest-list.html")
+    attendees = db.execute("SELECT * FROM attendees")
+    return render_template("guest-list.html", attendees=attendees)

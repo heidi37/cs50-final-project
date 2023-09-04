@@ -22,16 +22,13 @@
     <nav class="container">
       <ul class="nav justify-content-end">
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('helloWorld') }}"
+          <a class="nav-link" href="{{ url_for('index') }}"
             ><i class="fa-solid fa-house"></i
           ></a>
         </li>
       </ul>
     </nav>
     <div class="container">
-      <h1>Let's Do Brunch!</h1>
-      <h5>potluck breakfast planner</h5>
-      <img src="/static/images/egg.png" class="egg" alt="egg icon" />
       {% block content %}{% endblock %}
       <!-- <script src="/static/app.js"></script> -->
     </div>

@@ -1,25 +1,3 @@
 {% extends "layout.html" %} {% block title %} Guest List | {{ super() }} {%
 endblock %} {% block content %}
-<h2>Guest List</h2>
-<div>
-  <a href="/add-dish/3">
-    <button class="btn btn-success">Add A Dish</button>
-  </a>
-  <table class="table table-striped mt-5">
-    <thead>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Dish Type</th>
-      <th scope="col">Dish</th>
-    </thead>
-    {% for attendee in attendees %}
-    <tr>
-      <td>{{ attendee.first_name }}</td>
-      <td>{{ attendee.last_name }}</td>
-      <td>{{ attendee.dish_type }}</td>
-      <td>{{ attendee.dish }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-{% endblock %}
+<div>{% include 'dishes-table.html' %} {% endblock %}</div>

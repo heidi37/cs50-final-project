@@ -1,10 +1,14 @@
 {% extends "layout.html" %} {% block title %} Welcome | {{ super() }} {%
 endblock %} {% block content %}
-<h2>Hello {{ name }}</h2>
 <div>
-  <a href="{{ url_for('createEvent') }}">
-    <button class="btn btn-success">Create A Brunch</button>
-  </a>
+  <h1>Let's Do Brunch!</h1>
+  <h5>potluck breakfast planner</h5>
+  <img src="/static/images/egg.png" class="egg" alt="egg icon" />
+  <div>
+    <a href="{{ url_for('createEvent') }}">
+      <button class="btn btn-success">Create A Brunch</button>
+    </a>
+  </div>
   <div>{% include 'brunch-table.html' %}</div>
 </div>
 {% endblock %}

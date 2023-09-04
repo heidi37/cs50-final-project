@@ -20,12 +20,9 @@ DISHTYPES = [
 ]
 
 @app.route('/')
-@app.route('/<name>')
-
-def helloWorld(name="Cutie"):
+def index():
     brunches = db.execute("SELECT * FROM brunches")
-    return render_template("index.html", name=name, brunches=brunches)
-
+    return render_template("index.html", brunches=brunches)
 
 @app.route('/create-event', methods=["POST", "GET"])
 def createEvent():
@@ -48,48 +45,49 @@ def brunchList():
     brunches = db.execute("SELECT * FROM brunches")
     return render_template("brunch-list.html", brunches=brunches)
 
-@app.route('/add-dish')
+# @app.route('/add-dish')
 @app.route('/add-dish/<id>', methods=["POST", "GET"])
 def addDish(id):
+    return render_template("add-dish.html", dishtypes=DISHTYPES, id=id)
+
+@app.route('/dish-added/<id>', methods=["POST","GET"])
+def dishAdded(id):
     # if request.method == "POST":
-        # Validate submission
-    selectedId=id
-    if not selectedId:
-        return render_template("failure.html")
+    # Validate submission
+        selectedId=id
+        if not selectedId:
+            return render_template("failure.html")
 
-    first_name = request.form.get("first-name")
-    last_name_form = request.form.get("last-name")
-    dish_type_form = request.form.get("dish-type")
-    dish_form = request.form.get("dish-name")
-    if not first_name:
-        return render_template("failure.html")
-    # if not first_name_form or dish_type_form not in DISHTYPES:
-    #     return render_template("failure.html")
-    return "Selected ID is: {}".format(selectedId);
+        first_name_form = request.form.get("first-name")
+        last_name_form = request.form.get("last-name")
+        dish_type_form = request.form.get("dish-type")
+        dish_form = request.form.get("dish-name")
 
-    # db.execute("INSERT INTO attendees (first_name, last_name, dish_type, dish) VALUES(?, ?, ?, ?)", first_name_form, last_name_form, dish_type_form, dish_form)
 
-    # newAttendeeId=db.execute("SELECT id FROM attendees WHERE first_name=first_name_form AND last_name=last_name_form")
+        if not first_name_form or dish_type_form not in DISHTYPES:
+            return render_template("failure.html")
 
-    # db.execute("INSERT INTO attendee_brunch (brunch_id, attendee_id) VALUES (?,?) selectedId, newAttendeeId")
+        db.execute("INSERT INTO attendees (first_name, last_name, dish_type, dish) VALUES(?, ?, ?, ?)", first_name_form, last_name_form, dish_type_form, dish_form)
 
-    # return redirect("/guest-list")
-    # return render_template("add-dish.html", dishtypes=DISHTYPES)
+        newAttendeeId=db.execute("SELECT id FROM attendees WHERE first_name=? AND last_name=?", first_name_form, last_name_form)
+        db.execute("INSERT INTO attendee_brunch (brunch_id, attendee_id) VALUES (?,?)", selectedId, newAttendeeId[0]['id'])
 
-# @app.route('/guest-list')
-# def guestList():
-#     attendees = db.execute("SELECT * FROM attendees")
-#     return render_template("guest-list.html", attendees=attendees)
+        brunches = db.execute("SELECT * FROM brunches WHERE id = ?", selectedId)
 
-@app.route('/guest-list')
-@app.route('/guest-list/<id>', methods=["POST"])
+        attendees = db.execute("SELECT first_name, last_name, dish_type, dish FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
+
+        return render_template("dish-added.html", attendees=attendees, brunches=brunches)
+
+@app.route('/guest-list/<id>', methods=["POST","GET"])
 
 def guestList(id):
     selectedId=id
     if not id:
             return render_template("failure.html")
     attendees = db.execute("SELECT first_name, last_name, dish_type, dish FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
-    return render_template("guest-list.html", attendees=attendees)
+
+    brunches = db.execute("SELECT * FROM brunches WHERE id = ?", selectedId)
+    return render_template("guest-list.html", attendees=attendees, brunches=brunches)
 
 @app.route('/delete-brunch', methods=["POST"])
 def deleteBrunch():
@@ -98,9 +96,11 @@ def deleteBrunch():
         db.execute("DELETE FROM brunches WHERE id = ?", id)
     return redirect("brunch-list")
 
-@app.route('/RSVP', methods=["POST"])
-def rsvpBrunch():
-    id = request.form.get("id")
-    # if id:
-    #     db.execute("DELETE FROM brunches WHERE id = ?", id)
-    return redirect("guest-list")
+# @app.route('/delete-dish', methods=["POST"])
+# def deleteDish(id):
+#     # id = request.form.get("id")
+#     return redirect("/")
+#     return id
+#     # return "Attendee Id To Delete{}".format(id)
+#     if id:
+#         db.execute("DELETE FROM attendees WHERE id = ?", id)

@@ -20,7 +20,7 @@
           <input type="hidden" name="id" value="{{ brunch.id }}" />
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
-        <form action="{{ url_for('rsvpBrunch') }}" method="post">
+        <form action="/guest-list/{{ brunch.id }}" method="post">
           <input type="hidden" name="id" value="{{ brunch.id }}" />
           <button type="submit" class="btn btn-success">RSVP!</button>
         </form>

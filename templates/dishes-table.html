@@ -13,14 +13,25 @@
     <th scope="col">Last Name</th>
     <th scope="col">Dish Type</th>
     <th scope="col">Dish</th>
+    <th></th>
   </thead>
   {% for attendee in attendees %}
   <tr>
-    <td>{{ attendee.id }}</td>
+    <td>{{ attendee.attendee_id }}</td>
     <td>{{ attendee.first_name }}</td>
     <td>{{ attendee.last_name }}</td>
     <td>{{ attendee.dish_type }}</td>
     <td>{{ attendee.dish }}</td>
+    <td>
+      <form action="{{ url_for('deleteDish') }}" method="post">
+        <input
+          type="hidden"
+          name="dish_id"
+          value="{{ attendee.attendee_id }}"
+        />
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </td>
   </tr>
   {% endfor %}
 </table>

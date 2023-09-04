@@ -74,7 +74,7 @@ def dishAdded(id):
 
         brunches = db.execute("SELECT * FROM brunches WHERE id = ?", selectedId)
 
-        attendees = db.execute("SELECT first_name, last_name, dish_type, dish FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
+        attendees = db.execute("SELECT * FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
 
         return render_template("dish-added.html", attendees=attendees, brunches=brunches)
 
@@ -84,7 +84,7 @@ def guestList(id):
     selectedId=id
     if not id:
             return render_template("failure.html")
-    attendees = db.execute("SELECT first_name, last_name, dish_type, dish FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
+    attendees = db.execute("SELECT * FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
 
     brunches = db.execute("SELECT * FROM brunches WHERE id = ?", selectedId)
     return render_template("guest-list.html", attendees=attendees, brunches=brunches)
@@ -96,11 +96,14 @@ def deleteBrunch():
         db.execute("DELETE FROM brunches WHERE id = ?", id)
     return redirect("brunch-list")
 
-# @app.route('/delete-dish', methods=["POST"])
-# def deleteDish(id):
-#     # id = request.form.get("id")
-#     return redirect("/")
-#     return id
-#     # return "Attendee Id To Delete{}".format(id)
-#     if id:
-#         db.execute("DELETE FROM attendees WHERE id = ?", id)
+@app.route('/delete-dish', methods=["POST"])
+def deleteDish():
+    id = request.form.get("dish_id")
+
+    # return redirect("/")
+    # return id
+    # return "Attendee Id To Delete{}".format(id)
+    if id:
+        # return id;
+        db.execute("DELETE FROM attendees WHERE id = ?", id)
+    return render_template("index.html")

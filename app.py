@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, url_for
 from flask_session.__init__ import Session
 
 #Configure app
@@ -93,17 +93,27 @@ def guestList(id):
 def deleteBrunch():
     id = request.form.get("id")
     if id:
+        db.execute("DELETE FROM attendees WHERE id IN (SELECT attendee_id FROM attendee_brunch WHERE brunch_id = ?)", id)
+        # db.execute("DELETE FROM attendee_brunch WHERE brunch_id = ?", id)
         db.execute("DELETE FROM brunches WHERE id = ?", id)
     return redirect("brunch-list")
 
 @app.route('/delete-dish', methods=["POST"])
 def deleteDish():
-    id = request.form.get("dish_id")
-
-    # return redirect("/")
-    # return id
-    # return "Attendee Id To Delete{}".format(id)
+    id = int(request.form.get("dish_id"))
+    brunchId = int(request.form.get("brunch_id"))
     if id:
-        # return id;
+        # db.execute("DELETE FROM attendee_brunch WHERE attendee_id = ?", id)
         db.execute("DELETE FROM attendees WHERE id = ?", id)
-    return render_template("index.html")
+    return redirect(url_for("dishDeleted", id=brunchId))
+
+@app.route('/dish-deleted/<id>')
+def dishDeleted(id):
+    selectedId=id
+    if not id:
+            return render_template("failure.html")
+    attendees = db.execute("SELECT * FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
+
+    brunches = db.execute("SELECT * FROM brunches WHERE id = ?", selectedId)
+
+    return render_template("dish-deleted.html", attendees=attendees, brunches=brunches)

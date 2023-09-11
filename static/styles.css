@@ -1,5 +1,5 @@
 body {
-    background: beige;
+    background: #337CA0;
     text-align: center;
 }
 
@@ -14,9 +14,12 @@ body {
     width: 800px;
 }
 
-nav.container {
-    display: block;
-    background: hsl(60, 56%, 61%);
+.navbar-nav {
+    flex-direction: row;
+    padding-right: 13px;
+}
+.nav-item {
+    padding-left: 15px;
 }
 
 entry-form {
@@ -43,8 +46,4 @@ form div label {
 
 table .btn {
     margin: 0 0 10px 0;
-}
-
-i {
-    color: white;
 }

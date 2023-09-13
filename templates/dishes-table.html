@@ -6,6 +6,20 @@
   <strong>{{ brunch.location }}</strong>
 </p>
 <h2>Guest List</h2>
+<table class="table table-bordered">
+  <tr>
+    <th scope="col">Carbohydrate: {{ brunch.num_carb }}</th>
+    <th scope="col">Fruit: {{ brunch.num_fruit }}</th>
+    <th scope="col">Protein: {{ brunch.num_protein }}</th>
+    <th scope="col">Beverage: {{ brunch.num_bev }}</th>
+  </tr>
+  <tr>
+    <td><span {% if (brunch.num_carb / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_carb / brunch.num_attend * 100)|round(2) }}%</span></td>
+    <td><span {% if (brunch.num_fruit / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_fruit / brunch.num_attend * 100)|round(2) }}%</span></td>
+    <td><span {% if (brunch.num_protein / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_protein / brunch.num_attend * 100)|round(2) }}%</span></td>
+    <td><span {% if (brunch.num_bev / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_bev / brunch.num_attend * 100)|round(2) }}%</span></td>
+  </tr>
+</table>
 <table class="table table-striped mt-4">
   <thead>
     <th scope="col">Id</th>

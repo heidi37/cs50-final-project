@@ -3,22 +3,22 @@ endblock %} {% block content %}
 <div>
   <h1>Let's Do Brunch!</h1>
   <h5>potluck breakfast planner</h5>
+  <img src="/static/images/egg.png" class="egg mt-5" alt="egg icon" />
   <img src="/static/images/egg.png" class="egg" alt="egg icon" />
-  <img src="/static/images/egg.png" class="egg" alt="egg icon" />
-  <img src="/static/images/egg.png" class="egg" alt="egg icon" />
+  <img src="/static/images/egg.png" class="egg mt-5" alt="egg icon" />
   <div>
-    <p>
+    <p class="mt-5">
       Welcome! Use this app to create a brunch "event" then add guests to the
       event.
     </p>
-    <a href="{{ url_for('createEvent') }}">
+    <!-- <a href="{{ url_for('createEvent') }}">
       <button class="btn btn-success">Create Brunch</button>
     </a>
   </div>
   <div>
     <a href="{{ url_for('brunchList') }}">
       <button class="btn btn-success">View Brunches</button>
-    </a>
+    </a> -->
   </div>
   <div class="mt-5"><small>&copy;2023</small></div>
 </div>

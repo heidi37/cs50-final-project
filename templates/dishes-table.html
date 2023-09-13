@@ -26,6 +26,11 @@
       <form action="{{ url_for('deleteDish') }}" method="post">
         <input
           type="hidden"
+          name="dish_type"
+          value="{{ attendee.dish_type }}"
+        />
+        <input
+          type="hidden"
           name="dish_id"
           value="{{ attendee.attendee_id }}"
         />

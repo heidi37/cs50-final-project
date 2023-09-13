@@ -6,9 +6,9 @@ from flask_session.__init__ import Session
 app = Flask(__name__) #turn this file into a flask application
 
 #Configure session
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+# app.config["SESSION_PERMANENT"] = False
+# app.config["SESSION_TYPE"] = "filesystem"
+# Session(app)
 
 db = SQL("sqlite:///brunches.db")
 
@@ -63,7 +63,6 @@ def dishAdded(id):
         dish_type_form = request.form.get("dish-type")
         dish_form = request.form.get("dish-name")
 
-
         if not first_name_form or dish_type_form not in DISHTYPES:
             return render_template("failure.html")
 
@@ -72,11 +71,23 @@ def dishAdded(id):
         newAttendeeId=db.execute("SELECT id FROM attendees WHERE first_name=? AND last_name=?", first_name_form, last_name_form)
         db.execute("INSERT INTO attendee_brunch (brunch_id, attendee_id) VALUES (?,?)", selectedId, newAttendeeId[0]['id'])
 
+        if dish_type_form == "Protein":
+            db.execute("UPDATE brunches SET num_protein = num_protein + 1 WHERE id = ?", selectedId)
+        if dish_type_form == "Carbohydrate":
+            db.execute("UPDATE brunches SET num_carb = num_carb + 1 WHERE id = ?", selectedId)
+        if dish_type_form == "Fruit":
+            db.execute("UPDATE brunches SET num_fruit = num_fruit + 1 WHERE id = ?", selectedId)
+        if dish_type_form == "Beverage":
+            db.execute("UPDATE brunches SET num_bev = num_bev + 1 WHERE id = ?", selectedId)
+
+        db.execute("UPDATE brunches SET num_attend = num_attend + 1 WHERE id = ?", selectedId)
+
         brunches = db.execute("SELECT * FROM brunches WHERE id = ?", selectedId)
 
         attendees = db.execute("SELECT * FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
 
-        return render_template("dish-added.html", attendees=attendees, brunches=brunches)
+        # return render_template("dish-added.html", attendees=attendees, brunches=brunches)
+        return render_template("success.html")
 
 @app.route('/guest-list/<id>', methods=["POST","GET"])
 
@@ -94,7 +105,6 @@ def deleteBrunch():
     id = request.form.get("id")
     if id:
         db.execute("DELETE FROM attendees WHERE id IN (SELECT attendee_id FROM attendee_brunch WHERE brunch_id = ?)", id)
-        # db.execute("DELETE FROM attendee_brunch WHERE brunch_id = ?", id)
         db.execute("DELETE FROM brunches WHERE id = ?", id)
     return redirect("brunch-list")
 
@@ -102,9 +112,21 @@ def deleteBrunch():
 def deleteDish():
     id = int(request.form.get("dish_id"))
     brunchId = int(request.form.get("brunch_id"))
+    dish_type_form = request.form.get("dish_type")
     if id:
-        # db.execute("DELETE FROM attendee_brunch WHERE attendee_id = ?", id)
         db.execute("DELETE FROM attendees WHERE id = ?", id)
+
+    if dish_type_form == "Protein":
+        db.execute("UPDATE brunches SET num_protein = num_protein - 1 WHERE id = ?", brunchId)
+    if dish_type_form == "Carbohydrate":
+        db.execute("UPDATE brunches SET num_carb = num_carb - 1 WHERE id = ?", brunchId)
+    if dish_type_form == "Fruit":
+        db.execute("UPDATE brunches SET num_fruit = num_fruit - 1 WHERE id = ?", brunchId)
+    if dish_type_form == "Beverage":
+            db.execute("UPDATE brunches SET num_bev = num_bev - 1 WHERE id = ?", brunchId)
+
+    db.execute("UPDATE brunches SET num_attend = num_attend - 1 WHERE id = ?", brunchId)
+
     return redirect(url_for("dishDeleted", id=brunchId))
 
 @app.route('/dish-deleted/<id>')

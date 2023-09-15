@@ -1,11 +1,11 @@
 {% for brunch in brunches %}
-<h2 class="mt-4">{{ brunch.name }}</h2>
+<h1 class="mt-4">{{ brunch.name }}</h1>
 <p>
   {{ brunch.date }} | {{ brunch.time }}
   <br />
   <strong>{{ brunch.location }}</strong>
 </p>
-<h2>Guest List</h2>
+<h2 class="mb-4">Guests: {{ brunch.num_attend }}</h2>
 <table class="table table-bordered">
   <tr>
     <th scope="col">Carbohydrate: {{ brunch.num_carb }}</th>
@@ -13,29 +13,25 @@
     <th scope="col">Protein: {{ brunch.num_protein }}</th>
     <th scope="col">Beverage: {{ brunch.num_bev }}</th>
   </tr>
+  {% if brunch.num_attend > 0 %}
   <tr>
     <td><span {% if (brunch.num_carb / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_carb / brunch.num_attend * 100)|round(2) }}%</span></td>
     <td><span {% if (brunch.num_fruit / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_fruit / brunch.num_attend * 100)|round(2) }}%</span></td>
     <td><span {% if (brunch.num_protein / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_protein / brunch.num_attend * 100)|round(2) }}%</span></td>
     <td><span {% if (brunch.num_bev / brunch.num_attend * 100) > 25 %}style="color: red;"{% endif %}>{{ (brunch.num_bev / brunch.num_attend * 100)|round(2) }}%</span></td>
   </tr>
+  {% endif %}
 </table>
 <table class="table table-striped mt-4">
   <thead>
-    <th scope="col">Id</th>
+    <th scope="col"></th>
     <th scope="col">First Name</th>
     <th scope="col">Last Name</th>
     <th scope="col">Dish Type</th>
     <th scope="col">Dish</th>
-    <th></th>
   </thead>
   {% for attendee in attendees %}
   <tr>
-    <td>{{ attendee.attendee_id }}</td>
-    <td>{{ attendee.first_name }}</td>
-    <td>{{ attendee.last_name }}</td>
-    <td>{{ attendee.dish_type }}</td>
-    <td>{{ attendee.dish }}</td>
     <td>
       <form action="{{ url_for('deleteDish') }}" method="post">
         <input
@@ -49,13 +45,17 @@
           value="{{ attendee.attendee_id }}"
         />
         <input type="hidden" name="brunch_id" value="{{ brunch.id }}" />
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-dark">X</button>
       </form>
     </td>
+    <td>{{ attendee.first_name }}</td>
+    <td>{{ attendee.last_name }}</td>
+    <td>{{ attendee.dish_type }}</td>
+    <td>{{ attendee.dish }}</td>
   </tr>
   {% endfor %}
 </table>
 <a href="/add-dish/{{ brunch.id }}">
-  <button class="btn btn-success mt-4">Add A Dish</button>
+  <button class="btn btn-success mt-4">Add a Guest</button>
   {% endfor %}
 </a>

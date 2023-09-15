@@ -25,10 +25,15 @@
       <td>
         <form action="/guest-list/{{ brunch.id }}" method="post">
           <input type="hidden" name="id" value="{{ brunch.id }}" />
-          <button type="submit" class="btn btn-success">guests</button>
+          <button type="submit" class="btn btn-success">Guests</button>
         </form>
       </td>
     </tr>
     {% endfor %}
   </table>
+  <div class="text-center">
+    <a href="{{ url_for('createEvent') }}"
+      ><button class="btn btn-success">Create Brunch</button></a
+    >
+  </div>
 </div>

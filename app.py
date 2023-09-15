@@ -1,9 +1,11 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for, flash
 from flask_session.__init__ import Session
 
 #Configure app
 app = Flask(__name__) #turn this file into a flask application
+app.config.from_pyfile('config.py')
+
 
 #Configure session
 # app.config["SESSION_PERMANENT"] = False
@@ -24,7 +26,7 @@ def index():
     brunches = db.execute("SELECT * FROM brunches")
     return render_template("index.html", brunches=brunches)
 
-@app.route('/create-event', methods=["POST", "GET"])
+@app.route('/create-brunch', methods=["POST", "GET"])
 def createEvent():
     if request.method == "POST":
         # Validate submission
@@ -38,7 +40,7 @@ def createEvent():
         db.execute("INSERT INTO brunches (name, date, time, location) VALUES(?, ?, ?, ?)", name, date, time, location)
 
         return redirect("brunch-list")
-    return render_template("create-event.html")
+    return render_template("create-brunch.html")
 
 @app.route('/brunch-list')
 def brunchList():
@@ -46,14 +48,12 @@ def brunchList():
     return render_template("brunch-list.html", brunches=brunches)
 
 # @app.route('/add-dish')
-@app.route('/add-dish/<id>', methods=["POST", "GET"])
+@app.route('/add-dish/<id>', methods=["GET"])
 def addDish(id):
     return render_template("add-dish.html", dishtypes=DISHTYPES, id=id)
 
-@app.route('/dish-added/<id>', methods=["POST","GET"])
+@app.route('/dish-added/<id>', methods=["POST"])
 def dishAdded(id):
-    # if request.method == "POST":
-    # Validate submission
         selectedId=id
         if not selectedId:
             return render_template("failure.html")
@@ -86,11 +86,16 @@ def dishAdded(id):
 
         attendees = db.execute("SELECT * FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
 
-        # return render_template("dish-added.html", attendees=attendees, brunches=brunches)
-        return render_template("success.html")
+        variable_to_pass = selectedId
+        flash(variable_to_pass, 'variable')
+        return redirect(url_for('success'))
 
-@app.route('/guest-list/<id>', methods=["POST","GET"])
+@app.route('/success/')
+def success():
+    selectedId=flash('variable')
+    return render_template('success.html',selectedId=selectedId)
 
+@app.route('/guest-list/<id>', methods=["POST"])
 def guestList(id):
     selectedId=id
     if not id:

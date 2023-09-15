@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block title %} Create Event | {{ super() }} {%
+endblock %} {% block content %}
+<h1>Create Brunch</h1>
+<div class="form-container mt-3">
+  <form action="{{ url_for('createEvent') }}" method="post" class="entry-form">
+    <div>
+      <label for="event-name">Brunch:</label>
+      <input type="text" name="event-name" required />
+    </div>
+    <div>
+      <label for="event-date">Date of:</label>
+      <input type="date" name="event-date" required />
+    </div>
+    <div>
+      <label for="event-time">Time:</label>
+      <input type="time" name="event-time" required />
+    </div>
+    <div>
+      <label for="event-location">Location:</label>
+      <input type="text" name="event-location" required />
+    </div>
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-success">Create Brunch</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

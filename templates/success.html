@@ -3,5 +3,11 @@ endblock %} {% block content %}
 <h2>Success!</h2>
 <div>
   <p>Dish Added</p>
+  <form action="/guest-list/{{ selectedId }}" method="post">
+    <input type="hidden" name="id" value="{{ selectedId }}" />
+    <button type="submit" class="btn btn-success">
+      <i class="fa-solid fa-arrow-left"></i> Brunch
+    </button>
+  </form>
 </div>
 {% endblock %}

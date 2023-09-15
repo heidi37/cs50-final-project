@@ -26,19 +26,20 @@ body {
     padding-left: 15px;
 }
 
-entry-form {
-    width: 350px;
-    margin-top: 20px;
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 form div {
     padding: 5px 0;
     text-align: left;
-    margin-left: 27px;
 }
 
 form div label {
-    width: 26%;
+    width: 25%;
 }
 
 .btn {

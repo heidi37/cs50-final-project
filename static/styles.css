@@ -3,6 +3,12 @@ body {
     text-align: center;
 }
 
+h1 {
+font-family: 'Inter', sans-serif;
+font-family: 'Nanum Brush Script', cursive;
+font-size: 4rem;
+}
+
 .egg {
     width: 100px;
     padding: 10px;

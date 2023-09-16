@@ -1,6 +1,7 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, session, url_for, flash
+from flask import Flask, redirect, render_template, request, url_for, flash
 from flask_session.__init__ import Session
+import datetime
 
 #Configure app
 app = Flask(__name__) #turn this file into a flask application
@@ -34,10 +35,17 @@ def createEvent():
         date = request.form.get("event-date")
         time = request.form.get("event-time")
         location = request.form.get("event-location")
+
+        date_obj = datetime.datetime.strptime(date, "%Y-%m-%d")
+        output_date = date_obj.strftime("%m-%d-%Y")
+
+        time_obj = datetime.datetime.strptime(time, "%H:%M")
+        output_time = time_obj.strftime("%I:%M %p")
+
         if not name:
             return render_template("failure.html")
 
-        db.execute("INSERT INTO brunches (name, date, time, location) VALUES(?, ?, ?, ?)", name, date, time, location)
+        db.execute("INSERT INTO brunches (name, date, time, location) VALUES(?, ?, ?, ?)", name, output_date, output_time, location)
 
         return redirect("brunch-list")
     return render_template("create-brunch.html")

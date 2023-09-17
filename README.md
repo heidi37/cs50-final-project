@@ -8,6 +8,8 @@ This is a web application that allows you to create a brunch event at a specific
 
 Only brunches that are in the future will display on the guest list.
 
+The guest list displays the percentages of the types of dishes the guests are bringing based on these four types of dishes: Carbohydrate, Fruit, Beverage or Protein. In theory if there are a lot of items in one category, the guest will likely choose another type of dish when faced with these percentage figures. The figures turn red when exceeding 25% for a dish type.
+
 Functionality is built in to delete a brunch that will delete all the related guests as well. Also the abilty to delete just one guest from a brunch list is available.
 
 **layout.html** - template for providing HTML elements that display on all page
@@ -20,11 +22,11 @@ Functionality is built in to delete a brunch that will delete all the related gu
 
 **add-guest.html** - form to add a guest to a brunch, redirects to display **guest-list.html** for the current brunch
 
-**guest-list.html** - displays the guest list based on the id of the brunch that is passed to it **app.py**
+**guest-list.html** - displays the guest list based on the id of the brunch that is passed to it **app.py**. It pulls in dynamically the **dishes-table**.
 
-**guest-deleted.html** - when a guest is deleted, redirects to a guest page without the last deleted guest.
+**guest-deleted.html** - when a guest is deleted, redirects to a guest page without the last deleted guest and shows a message confirming the guest is deleted
 
-**success.html** - displays when a guest is successfully added, add this functionality to prevent duplicates on refreshing the page after adding a guest and shows a message confirming the guest is deleted.
+**success.html** - displays when a guest is successfully added, added this functionality to prevent duplicates on refreshing the page after adding a guest.
 
 **failure.html** - displays if server side validation fails
 

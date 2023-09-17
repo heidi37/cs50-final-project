@@ -1,7 +1,35 @@
 # Brunch Creation App - CS-50 Final Project
 
-cs50 final project using html, css, javascript, python, SQL and Flask
-
 #### Video Demo:
 
-#### Description
+#### Description:
+
+This is a web application that allows you to create a brunch event at a specific date, time and location. You may then add guests and what they are bringing to the newly created brunch. There is a feature to copy the URL of the brunch guest list and send to someone so they may add themselves and their dish to the guest list.
+
+Only brunches that are in the future will display on the guest list.
+
+Functionality is built in to delete a brunch that will delete all the related guests as well. Also the abilty to delete just one guest from a brunch list is available.
+
+**layout.html** - template for providing HTML elements that display on all page
+
+**index.html** - template for the home page, just text, not dynamic
+
+**create-brunch.html** - form to create a new brunch, redirects to **brunch-list.html**
+
+**brunch-list.html** - pulls in **brunch-table.html** to dynamically display a list of brunches with a start date greater than or equal to today
+
+**add-guest.html** - form to add a guest to a brunch, redirects to display **guest-list.html** for the current brunch
+
+**guest-list.html** - displays the guest list based on the id of the brunch that is passed to it **app.py**
+
+**guest-deleted.html** - when a guest is deleted, redirects to a guest page without the last deleted guest.
+
+**success.html** - displays when a guest is successfully added, add this functionality to prevent duplicates on refreshing the page after adding a guest and shows a message confirming the guest is deleted.
+
+**failure.html** - displays if server side validation fails
+
+**app.py** - contains all python code, utlized flask for for dynamic HTML templating, sqlite for querying the database
+
+**/static/app.js** - a javascript function to copy the URL of a brunch to the clipboard so it can be shared
+
+**/static/styles.css** - External CSS stylesheet, also utilzied Bootstrap for styling from a CDN

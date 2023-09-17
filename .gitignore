@@ -3,4 +3,3 @@ flask_session/
 __pycache__/
 notes.txt
 brunches.db
-config.py

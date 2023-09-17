@@ -1,11 +1,9 @@
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, url_for, flash
-from flask_session.__init__ import Session
+from flask import Flask, redirect, render_template, request, url_for
 import datetime
 
 #Configure app
 app = Flask(__name__) #turn this file into a flask application
-app.config.from_pyfile('config.py')
 
 db = SQL("sqlite:///brunches.db")
 

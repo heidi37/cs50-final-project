@@ -51,10 +51,10 @@ def brunchList():
     brunches = db.execute("SELECT * FROM brunches WHERE date >= ?", output_today)
     return render_template("brunch-list.html", brunches=brunches)
 
-# @app.route('/add-dish')
-@app.route('/add-dish/<id>', methods=["GET"])
+
+@app.route('/add-guest/<id>', methods=["GET"])
 def addDish(id):
-    return render_template("add-dish.html", dishtypes=DISHTYPES, id=id)
+    return render_template("add-guest.html", dishtypes=DISHTYPES, id=id)
 
 @app.route('/dish-added/<id>', methods=["POST"])
 def dishAdded(id):
@@ -90,16 +90,9 @@ def dishAdded(id):
 
         attendees = db.execute("SELECT * FROM attendees JOIN attendee_brunch ON attendees.id=attendee_brunch.attendee_id JOIN brunches ON brunches.id=attendee_brunch.brunch_id WHERE brunches.id = ?", selectedId)
 
-        variable_to_pass = selectedId
-        flash(variable_to_pass, 'variable')
-        return redirect(url_for('success'))
+        return render_template('success.html',selectedId=selectedId)
 
-@app.route('/success/')
-def success():
-    selectedId=flash('variable')
-    return render_template('success.html',selectedId=selectedId)
-
-@app.route('/guest-list/<id>', methods=["POST"])
+@app.route('/guest-list/<id>', methods=["POST","GET"])
 def guestList(id):
     selectedId=id
     if not id:
@@ -138,7 +131,7 @@ def deleteDish():
 
     return redirect(url_for("dishDeleted", id=brunchId))
 
-@app.route('/dish-deleted/<id>')
+@app.route('/guest-deleted/<id>')
 def dishDeleted(id):
     selectedId=id
     if not id:
@@ -147,4 +140,4 @@ def dishDeleted(id):
 
     brunches = db.execute("SELECT * FROM brunches WHERE id = ?", selectedId)
 
-    return render_template("dish-deleted.html", attendees=attendees, brunches=brunches)
+    return render_template("guest-deleted.html", attendees=attendees, brunches=brunches)

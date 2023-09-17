@@ -55,7 +55,10 @@
   </tr>
   {% endfor %}
 </table>
-<a href="/add-dish/{{ brunch.id }}">
+<a href="/add-guest/{{ brunch.id }}">
   <button class="btn btn-success mt-4">Add a Guest</button>
   {% endfor %}
 </a>
+<div>
+<button class="btn btn-info mt-4" onclick="copyUrlToClipboard()">Copy URL</button>
+</div>

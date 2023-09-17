@@ -7,12 +7,6 @@ import datetime
 app = Flask(__name__) #turn this file into a flask application
 app.config.from_pyfile('config.py')
 
-
-#Configure session
-# app.config["SESSION_PERMANENT"] = False
-# app.config["SESSION_TYPE"] = "filesystem"
-# Session(app)
-
 db = SQL("sqlite:///brunches.db")
 
 DISHTYPES = [
@@ -32,11 +26,11 @@ def createEvent():
     if request.method == "POST":
         # Validate submission
         name = request.form.get("event-name")
-        date = request.form.get("event-date")
+        eventDate = request.form.get("event-date")
         time = request.form.get("event-time")
         location = request.form.get("event-location")
 
-        date_obj = datetime.datetime.strptime(date, "%Y-%m-%d")
+        date_obj = datetime.datetime.strptime(eventDate, "%Y-%m-%d")
         output_date = date_obj.strftime("%m-%d-%Y")
 
         time_obj = datetime.datetime.strptime(time, "%H:%M")
@@ -52,7 +46,9 @@ def createEvent():
 
 @app.route('/brunch-list')
 def brunchList():
-    brunches = db.execute("SELECT * FROM brunches")
+    today_obj = datetime.date.today()
+    output_today = today_obj.strftime("%m-%d-%Y")
+    brunches = db.execute("SELECT * FROM brunches WHERE date >= ?", output_today)
     return render_template("brunch-list.html", brunches=brunches)
 
 # @app.route('/add-dish')

@@ -1,5 +1,5 @@
 body {
-    background: #337CA0;
+    background-color: hsl(48, 95%, 95%);
     text-align: center;
 }
 
@@ -21,7 +21,7 @@ font-size: 4rem;
 }
 
 .navbar {
-    background-color: #FEF6D7;
+    background-color: hsl(0, 0%, 98%);
 }
 
 .navbar-nav {
@@ -44,12 +44,18 @@ form div {
     text-align: left;
 }
 
-form div label {
-    width: 25%;
+select#dish-type {
+    height: 30px;
+    width: 100%;
 }
 
+form div label, form input {
+    width: 100%;
+}
+
+
 .btn {
-    margin-top: 10px;
+    margin-top: 30px;
     color: white;
     border: none;
     padding: 5px 25px;

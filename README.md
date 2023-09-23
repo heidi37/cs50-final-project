@@ -2,6 +2,8 @@
 
 #### Video Demo:
 
+https://youtu.be/zXS2b5kVV1w
+
 #### Description:
 
 This is a web application that allows you to create a brunch event at a specific date, time and location. You may then add guests and what they are bringing to the newly created brunch. There is a feature to copy the URL of the brunch guest list and send to someone so they may add themselves and their dish to the guest list.
@@ -11,6 +13,10 @@ Only brunches that are in the future will display on the guest list.
 The guest list displays the percentages of the types of dishes the guests are bringing based on these four types of dishes: Carbohydrate, Fruit, Beverage or Protein. In theory if there are a lot of items in one category, the guest will likely choose another type of dish when faced with these percentage figures. The figures turn red when exceeding 25% for a dish type.
 
 Functionality is built in to delete a brunch that will delete all the related guests as well. Also the abilty to delete just one guest from a brunch list is available.
+
+**Backend:** The application is built with Python for logic. SQL is used for querying and modifying the database. Flask is what converts the templates to HTML utilzing the Jinga templating language.
+
+**Frontend** The front end is HTML, CSS utilzing the Bootstrap framework, and there is a javascript feature that copies the URL of the current brunch list so that you can share it with others and they can add themselves to the guest list.
 
 **layout.html** - template for providing HTML elements that display on all page
 

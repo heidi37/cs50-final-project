@@ -1,4 +1,4 @@
-# Brunch Creation App - CS-50 Final Project
+# Let's Do Brunch - CS50 Final Project
 
 #### Video Demo:
 

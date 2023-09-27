@@ -3,3 +3,6 @@ flask_session/
 __pycache__/
 notes.txt
 brunches.db
+*.pyc
+*.pyo
+.env

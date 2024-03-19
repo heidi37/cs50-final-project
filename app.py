@@ -1,6 +1,7 @@
 from cs50 import SQL
 from flask import Flask, redirect, render_template, request, url_for
-import datetime
+from datetime import datetime
+
 
 #Configure app
 app = Flask(__name__) #turn this file into a flask application
@@ -16,8 +17,9 @@ DISHTYPES = [
 
 @app.route('/')
 def index():
+    current_year = datetime.now().strftime('%Y')
     brunches = db.execute("SELECT * FROM brunches")
-    return render_template("index.html", brunches=brunches)
+    return render_template("index.html", brunches=brunches, current_year=current_year)
 
 @app.route('/create-brunch', methods=["POST", "GET"])
 def createEvent():
@@ -28,10 +30,10 @@ def createEvent():
         time = request.form.get("event-time")
         location = request.form.get("event-location")
 
-        date_obj = datetime.datetime.strptime(eventDate, "%Y-%m-%d")
+        date_obj = datetime.strptime(eventDate, "%Y-%m-%d")
         output_date = date_obj.strftime("%m-%d-%Y")
 
-        time_obj = datetime.datetime.strptime(time, "%H:%M")
+        time_obj = datetime.strptime(time, "%H:%M")
         output_time = time_obj.strftime("%I:%M %p")
 
         if not name:
@@ -44,7 +46,7 @@ def createEvent():
 
 @app.route('/brunch-list')
 def brunchList():
-    today_obj = datetime.date.today()
+    today_obj = datetime.today().date()
     output_today = today_obj.strftime("%m-%d-%Y")
     brunches = db.execute("SELECT * FROM brunches WHERE date >= ?", output_today)
     return render_template("brunch-list.html", brunches=brunches)

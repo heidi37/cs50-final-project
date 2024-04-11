@@ -23,42 +23,60 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-SF8R56H54Q"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-SF8R56H54Q");
+    </script>
   </head>
   <body>
     <div class="app-content">
-    <nav class="container navbar navbar-light">
-      <a class="navbar-brand" href="{{ url_for('index') }}">
-        <img
-          src="/static/images/egg.png"
-          class="egg"
-          alt="egg icon"
-          width="15"
-          class="d-inline-block align-top"
-          alt=""
-        />
-        Let's Do Brunch!
-      </a>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('createEvent') }}"
-            >Create Brunch</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('brunchList') }}"
-            >View Brunches</a
-          >
-        </li>
-      </ul>
-    </nav>
-    <div class="container">
-      {% block content %}{% endblock %}
+      <nav class="container navbar navbar-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+          <img
+            src="/static/images/egg.png"
+            class="egg"
+            alt="egg icon"
+            width="15"
+            class="d-inline-block align-top"
+            alt=""
+          />
+          Let's Do Brunch!
+        </a>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('createEvent') }}"
+              >Create Brunch</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('brunchList') }}"
+              >View Brunches</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="container">{% block content %}{% endblock %}</div>
     </div>
-    </div>
-    <footer><p>
-      <a href="https://heidifryzell.com"><i class="fa-solid fa-terminal"></i></a>
-      <a href="https://heidifryzell.com">heidifryzell.com</a> &copy;<span id="copyrightYear"></span>
-    </p></footer>
+    <footer>
+      <p>
+        <a href="https://heidifryzell.com"
+          ><i class="fa-solid fa-terminal"></i
+        ></a>
+        <a href="https://heidifryzell.com">heidifryzell.com</a> &copy;<span
+          id="copyrightYear"
+        ></span>
+      </p>
+    </footer>
     <script src="/static/app.js"></script>
   </body>
 </html>

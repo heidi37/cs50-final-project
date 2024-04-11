@@ -2,11 +2,11 @@
 
 <img src="/static/images/screenshot.png" alt="screenshot of my CS50 Brunch App" />
 
-#### Video Demo:
+## Video Demo
 
 https://youtu.be/zXS2b5kVV1w
 
-#### Description:
+## Description
 
 This is a web application that allows you to create a brunch event at a specific date, time and location. You may then add guests and what they are bringing to the newly created brunch. There is a feature to copy the URL of the brunch guest list and send to someone so they may add themselves and their dish to the guest list.
 

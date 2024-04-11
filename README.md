@@ -1,5 +1,7 @@
 # Let's Do Brunch - CS50 Final Project
 
+<img src="/static/images/screenshot.png" alt="screenshot of my CS50 Brunch App" />
+
 #### Video Demo:
 
 https://youtu.be/zXS2b5kVV1w

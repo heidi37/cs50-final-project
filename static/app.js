@@ -1,3 +1,5 @@
+document.getElementById("copyrightYear").innerText = new Date().getFullYear();
+
 function copyUrlToClipboard() {
     var url = window.location.href;
 

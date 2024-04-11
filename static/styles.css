@@ -1,12 +1,16 @@
 body {
     background-color: hsl(48, 95%, 95%);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
 }
 
 h1 {
-font-family: 'Inter', sans-serif;
-font-family: 'Nanum Brush Script', cursive;
-font-size: 4rem;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Nanum Brush Script', cursive;
+    font-size: 4rem;
 }
 
 .egg {
@@ -17,7 +21,13 @@ font-size: 4rem;
 .container {
     padding: 20px;
     background: #fff;
-    width: 800px;
+    max-width: 800px;
+}
+
+@media screen and (max-width: 562px){
+    nav.container.navbar.navbar-light {
+        flex-direction: column;
+    }
 }
 
 .navbar {
@@ -28,10 +38,10 @@ font-size: 4rem;
     flex-direction: row;
     padding-right: 13px;
 }
+
 .nav-item {
     padding-left: 15px;
 }
-
 
 .form-container {
     display: flex;
@@ -53,7 +63,6 @@ form div label, form input {
     width: 100%;
 }
 
-
 .btn {
     margin-top: 30px;
     color: white;
@@ -64,3 +73,35 @@ form div label, form input {
 table .btn {
     margin: 0 0 10px 0;
 }
+
+footer {
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+footer p {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+footer a {
+    color: #39457b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+footer .fa-terminal{
+    animation: terminal-animate 1.5s infinite;
+  }
+
+  @keyframes terminal-animate {
+    0% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

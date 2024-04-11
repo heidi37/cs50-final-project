@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="/static/styles.css" />
   </head>
   <body>
+    <div class="app-content">
     <nav class="container navbar navbar-light">
       <a class="navbar-brand" href="{{ url_for('index') }}">
         <img
@@ -52,7 +53,12 @@
     </nav>
     <div class="container">
       {% block content %}{% endblock %}
-      <script src="/static/app.js"></script>
     </div>
+    </div>
+    <footer><p>
+      <a href="https://heidifryzell.com"><i class="fa-solid fa-terminal"></i></a>
+      <a href="https://heidifryzell.com">heidifryzell.com</a> &copy;<span id="copyrightYear"></span>
+    </p></footer>
+    <script src="/static/app.js"></script>
   </body>
 </html>

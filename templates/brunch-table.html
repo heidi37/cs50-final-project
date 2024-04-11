@@ -1,41 +1,45 @@
 <div class="table-div">
-  <table class="table table-striped table-resposive mt-5">
-    <thead>
-      <th scope="col"></th>
-      <th scope="col">Name</th>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-      <th scope="col">Location</th>
-      <th scope="col">Guests</th>
-      <th scope="col"></th>
-    </thead>
-    {% for brunch in brunches %}
-
-    <tr>
-      <td>
-        <form action="{{ url_for('deleteBrunch') }}" method="post">
-          <input type="hidden" name="id" value="{{ brunch.id }}" />
-          <button type="submit" class="btn btn-dark">X</button>
-        </form>
-      </td>
-      <td>{{ brunch.name }}</td>
-      <td>{{ brunch.date }}</td>
-      <td>{{ brunch.time }}</td>
-      <td>{{ brunch.location }}</td>
-      <td>{{ brunch.num_attend }}</td>
-      <td>
-        <form action="/guest-list/{{ brunch.id }}" method="post">
-          <input type="hidden" name="id" value="{{ brunch.id }}" />
-          <button type="submit" class="btn btn-success">Guests</button>
-        </form>
-      </td>
-    </tr>
-
-    {% endfor %}
-  </table>
+  <div class="table-responsive">
+    <table class="table table-striped mt-5">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+          <th scope="col">Location</th>
+          <th scope="col">Guests</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for brunch in brunches %}
+        <tr>
+          <td>
+            <form action="{{ url_for('deleteBrunch') }}" method="post">
+              <input type="hidden" name="id" value="{{ brunch.id }}" />
+              <button type="submit" class="btn btn-dark">X</button>
+            </form>
+          </td>
+          <td>{{ brunch.name }}</td>
+          <td>{{ brunch.date }}</td>
+          <td>{{ brunch.time }}</td>
+          <td>{{ brunch.location }}</td>
+          <td>{{ brunch.num_attend }}</td>
+          <td>
+            <form action="/guest-list/{{ brunch.id }}" method="post">
+              <input type="hidden" name="id" value="{{ brunch.id }}" />
+              <button type="submit" class="btn btn-success">Guests</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
   <div class="text-center">
-    <a href="{{ url_for('createEvent') }}"
-      ><button class="btn btn-success">Create Brunch</button></a
-    >
+    <a href="{{ url_for('createEvent') }}">
+      <button class="btn btn-success">Create Brunch</button>
+    </a>
   </div>
 </div>

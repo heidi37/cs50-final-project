@@ -6,6 +6,7 @@
   <strong>{{ brunch.location }}</strong>
 </p>
 <h2 class="mb-4">Guests: {{ brunch.num_attend }}</h2>
+<div class="table-responsive">
 <table class="table table-bordered">
   <tr>
     <th scope="col">Carbohydrate: {{ brunch.num_carb }}</th>
@@ -22,6 +23,8 @@
   </tr>
   {% endif %}
 </table>
+</div>
+<div class="table-responsive">
 <table class="table table-striped mt-4">
   <thead>
     <th scope="col"></th>
@@ -55,6 +58,7 @@
   </tr>
   {% endfor %}
 </table>
+</div>
 <a href="/add-guest/{{ brunch.id }}">
   <button class="btn btn-success mt-4">Add a Guest</button>
   {% endfor %}

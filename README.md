@@ -43,3 +43,5 @@ Functionality is built in to delete a brunch that will delete all the related gu
 **/static/app.js** - a javascript function to copy the URL of a brunch to the clipboard so it can be shared
 
 **/static/styles.css** - External CSS stylesheet, also utilzied Bootstrap for styling from a CDN
+
+[View Live Project](https://heidi37.pythonanywhere.com/)
